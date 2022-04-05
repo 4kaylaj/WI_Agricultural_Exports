@@ -7,7 +7,6 @@ Created on Fri Mar 25 19:06:05 2022
 """
 #Import modules
 import requests
-import json
 import pandas as pd
 
 #%%
@@ -16,6 +15,7 @@ def api_call(year, hs_code, filename):
     #Set api varialbe
   api = 'https://api.census.gov/data/timeseries/intltrade/exports/statehs'
   #Set varialbes
+  #Cannot get QTY varaiable to work. Check error
   var_str = "STATE,ALL_VAL_YR,E_COMMODITY,E_COMMODITY_LDESC"
   #Set key
   key_value = "881eddebb146c5b0babd4b75ceea21da104a4ad3"
@@ -27,6 +27,7 @@ def api_call(year, hs_code, filename):
   #Print results
   print(f"Status code: {response.status_code}")
   print(f"Response: {response.text}")
+  #Convert QTY to 
   #Create a dataframe
   row_list = response.json()
   #Set column name list
@@ -35,9 +36,14 @@ def api_call(year, hs_code, filename):
   datarows = row_list[1:]
   #Convert into a Pandas dataframe
   dataframe = pd.DataFrame(columns=colnames, data=datarows)
+  #Set index
+  dataframe.set_index("STATE")
+  #Write dataframe to file
   dataframe.to_csv(filename)
 #%%
 #Run api_call function for ginseng 
+#What state is XX?
+#Do I actually need to write these into CSV files?
 api_call("2013","121120", "121130_2013.csv")
 api_call("2014","121120", "121130_2014.csv")
 api_call("2015","121120", "121130_2015.csv")
@@ -46,7 +52,7 @@ api_call("2017","121120", "121130_2017.csv")
 api_call("2018","121120", "121130_2018.csv")
 api_call("2019","121120", "121130_2019.csv")
 api_call("2020","121120", "121130_2020.csv")
-api_call("2021", "121120", "121130_2021.csv")
+api_call("2021","121120", "121130_2021.csv")
 #%%
 
 
