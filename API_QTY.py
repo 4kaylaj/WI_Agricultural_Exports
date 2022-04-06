@@ -12,7 +12,7 @@ import pandas as pd
 
 #%%
 #Define funtion to creat api call with year & hs arguement
-def api_call(year, hs_code, filename):
+def api_call(year, hs_code):
     #Set api varialbe
   api = 'https://api.census.gov/data/timeseries/intltrade/exports/hs'
   #Set varialbes
@@ -36,20 +36,38 @@ def api_call(year, hs_code, filename):
   #Define data
   datarows = row_list[1:]
   #Convert into a Pandas dataframe
-  dataframe = pd.DataFrame(columns=colnames, data=datarows)
-  #Write dataframe to file
-  dataframe.to_csv(filename)
+  df = pd.DataFrame(columns=colnames, data=datarows)
+  #Do nothing if QTY=M???
+  for rec in df:
+      if df["QTY_1_YR_FLAG"] == 'M':
+          print("Flag: Missing Values for QTY_1_YR")
+      else:
+          print(df['QTY_1_YR'])
+      if df["QTY_2_YR_FLAG"] == "M":
+          print("Flag: Missing Values for QTY_2_YR")
+      else:
+          print(df['QTY_2_YR'])
+
+  
 #%%
-#Figure out how to check quiantiy withotu converting into CSV
-api_call("2013","121120", "121130_2013_QTY.csv")
-api_call("2014","121120", "121130_2014_QTY.csv")
-api_call("2015","121120", "121130_2015_QTY.csv")
-api_call("2016","121120", "121130_2016_QTY.csv")
-api_call("2017","121120", "121130_2017_QTY.csv")
-api_call("2018","121120", "121130_2018_QTY.csv")
-api_call("2019","121120", "121130_2019_QTY.csv")
-api_call("2020","121120", "121130_2020_QTY.csv")
-api_call("2021","121120", "121130_2021_QTY.csv")
+api_call("2013","121120")
 #%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
