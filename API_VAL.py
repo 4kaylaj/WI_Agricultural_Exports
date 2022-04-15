@@ -44,15 +44,15 @@ def api_call(year, hs_code, filename):
 #Run api_call function for ginseng 
 #What state is XX?
 #Do I actually need to write these into CSV files?
-api_call("2013","121120", "121130_2013.csv")
-api_call("2014","121120", "121130_2014.csv")
-api_call("2015","121120", "121130_2015.csv")
-api_call("2016","121120", "121130_2016.csv")
-api_call("2017","121120", "121130_2017.csv")
-api_call("2018","121120", "121130_2018.csv")
-api_call("2019","121120", "121130_2019.csv")
-api_call("2020","121120", "121130_2020.csv")
-api_call("2021","121120", "121130_2021.csv")
+api_call("2013","120810", "2013_FlourMealSoybean.csv")
+api_call("2014","120810", "2014_FlourMealSoybean.csv")
+api_call("2015","120810", "2015_FlourMealSoybean.csv")
+api_call("2016","120810", "2016_FlourMealSoybean.csv")
+api_call("2017","120810", "2017_FlourMealSoybean.csv")
+api_call("2018","120810", "2018_FlourMealSoybean.csv")
+api_call("2019","120810", "2019_FlourMealSoybean.csv")
+api_call("2020","120810", "2020_FlourMealSoybean.csv")
+api_call("2021","120810", "2021_FlourMealSoybean.csv")
 #%%
 
 
