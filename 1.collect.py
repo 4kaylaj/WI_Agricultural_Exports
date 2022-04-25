@@ -5,11 +5,20 @@ Created on Wed Apr 20 15:00:23 2022
 
 @author: kayla
 """
-#Import modules
+#Overview:
+#This script is used to pull export data from the U.S. Census Bureau,
+#USA Trade Online by Harmonized System (HS) code and stores retrieved
+#data in CSV files. Although this project examines several commodities,
+#exporting data into a CSV file allows the functions to be useful
+#for anyone seeking to retrieve general export data from USA Trade Online.
+#%%
+#This script uses two modules: requests and pandas. 
 import requests
 import pandas as pd
 
 #%%
+#USA Trade Online has several endpoint options. Endpoints can be choosen
+#based on 
 #Define funtion to creat api call hs arguement to get value varialbe
 def val_call(hs_code, filename):
     #Set api varialbe
