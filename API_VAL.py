@@ -41,9 +41,7 @@ def api_call(year, hs_code, filename):
   #Write dataframe to file
   dataframe.to_csv(filename)
 #%%
-#Run api_call function for ginseng 
-#What state is XX?
-#Do I actually need to write these into CSV files?
+#Run api_call function for Flour/Meal Soybeans
 api_call("2013","120810", "2013_FlourMealSoybean.csv")
 api_call("2014","120810", "2014_FlourMealSoybean.csv")
 api_call("2015","120810", "2015_FlourMealSoybean.csv")
@@ -54,6 +52,41 @@ api_call("2019","120810", "2019_FlourMealSoybean.csv")
 api_call("2020","120810", "2020_FlourMealSoybean.csv")
 api_call("2021","120810", "2021_FlourMealSoybean.csv")
 #%%
+#Soybeans, Whether or Not Broken (1201)
+api_call("2013","1201", "2013_1201Soybean.csv")
+api_call("2014","1201", "2014_1201Soybean.csv")
+api_call("2015","1201", "2015_1201Soybean.csv")
+api_call("2016","1201", "2016_1201Soybean.csv")
+api_call("2017","1201", "2017_1201Soybean.csv")
+api_call("2018","1201", "2018_1201Soybean.csv")
+api_call("2019","1201", "2019_1201Soybean.csv")
+api_call("2020","1201", "2020_1201Soybean.csv")
+api_call("2021","1201", "2021_1201Soybean.csv")
+
+#%%%
+api_call("2013","040410", "2013_Whey.csv")
+api_call("2014","040410", "2014_Whey.csv")
+api_call("2015","040410", "2015_Whey.csv")
+api_call("2016","040410", "2016_Whey.csv")
+api_call("2017","040410", "2017_Whey.csv")
+api_call("2018","040410", "2018_Whey.csv")
+api_call("2019","040410", "2019_Whey.csv")
+api_call("2020","040410", "2020_Whey.csv")
+api_call("2021","040410", "2021_Whey.csv")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

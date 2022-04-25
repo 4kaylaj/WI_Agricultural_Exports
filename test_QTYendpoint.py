@@ -17,12 +17,12 @@ def api_call(year, hs_code, filename):
   api = 'https://api.census.gov/data/timeseries/intltrade/exports/hs'
   #Set varialbes
   #Cannot get QTY varaiable to work. Check error
-  var_str = "E_COMMODITY,E_COMMODITY_LDESC,QTY_1_YR,QTY_1_YR_FLAG,QTY_2_YR,QTY_2_YR_FLAG"
+  var_str = "E_COMMODITY,E_COMMODITY_LDESC,QTY_1_YR,QTY_1_YR_FLAG,QTY_2_YR,QTY_2_YR_FLAG,MONTH"
   #Set key
   key_value = "881eddebb146c5b0babd4b75ceea21da104a4ad3"
   #Set payload 
   payload = {'get':var_str, 'key':key_value, "E_COMMODITY":hs_code,
-             "YEAR":year, "MONTH": "12"}
+             "YEAR":year}
   #Create response varialbe
   response=requests.get(api,payload)
   #Print results
