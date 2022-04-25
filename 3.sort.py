@@ -203,7 +203,7 @@ Master_Whey = Master_Whey.drop(columns= ["_merge", "E_COMMODITY",
 #Sum Quantities to HS Level of Values
 sum_list = ["ModWhey_QTY","ModOtherWhey_QTY","FluidOtherWhey_QTY",
             "DriedOtherWhey_QTY"]
-Master_Whey['Sum'] = Master_Whey[sum_list].sum(axis=1)
+Master_Whey['QTY_1_YR'] = Master_Whey[sum_list].sum(axis=1)
 #https://moonbooks.org/Articles/How-to-sum-multiple-columns-together-of-a-dataframe-with-pandas-in-python-/
 #%%
 VWhey = whey_df.query("STATE=='-'")
@@ -301,7 +301,7 @@ Master_Gin = Master_Gin.drop(columns=drop_list)
                               
 #Sum Quantities to HS Level of Values
 sum_list = ["CultGin_QTY","WildGin_QTY"]
-Master_Gin['Sum'] = Master_Gin[sum_list].sum(axis=1)
+Master_Gin['QTY_1_YR'] = Master_Gin[sum_list].sum(axis=1)
 #%%
 VGin = gin_df.query("STATE=='-'")
 WIGin = gin_df.query("STATE=='WI'")
@@ -358,7 +358,7 @@ Master_Gin.to_csv("Master_Gin.csv", index=False)
 
 #%%
 #%%
-#Corn
+#Corn NEED TO CLEAN THIS
 #Pull out quantities
 QCorn = corn_df.loc[corn_df["QTY_1_YR"] >= 0]
 #Drop columns
@@ -411,7 +411,7 @@ master_corn = master_corn.drop(columns=drop_list)
                               
 #Sum Quantities to HS Level of Values
 sum_list = ["Cornmeal_QTY","Other_QTY"]
-master_corn['Sum'] = master_corn[sum_list].sum(axis=1)
+master_corn['QTY_1_YR'] = master_corn[sum_list].sum(axis=1)
 #%%
 #Merge VCorn onto onto Master
 master_corn = master_corn.merge(VCorn,
@@ -426,7 +426,7 @@ print(master_corn['_merge'].value_counts())
 #Clean Master DF
 master_corn = master_corn.drop(columns= ["_merge","E_COMMODITY",
                                          "E_COMMODITY_LDESC","STATE",
-                                         "QTY_1_YR","QTY_1_YR_FLAG",
+                                         "QTY_1_YR_FLAG",
                                          "QTY_2_YR","QTY_2_YR_FLAG"])
 
 #Rename Column
