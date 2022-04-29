@@ -57,10 +57,11 @@ val_call("040410", "Whey.csv")
 #Ginseng
 val_call("121120", "Ginseng.csv")
 
-#Cranberries, Blueberries, Etc, Fresh
-#val_call("081040", "Cranberries.csv")
-
+#Corn
 val_call("110313", "Corn.csv")
+
+#Milk (less than 1% fat)
+val_call("040110", "Milk.csv")
 
 #%%
 #Define funtion to creat api call with hs arguement to get quantity varialbe
@@ -94,10 +95,8 @@ def quant_call(hs_code, filename):
 #Run api_call function for Flour/Meal Soybeans
 quant_call("1208100000", "QTY_FlourMealSoybean.csv")
 
-
 #Soybeans, Whether or Not Broken (1201)
 quant_call("1201100000", "QTY_Soybeans.csv")
-#Need another call here
 
 #Whey
 quant_call("0404100500", "ModWhey_QTY.csv") #Kg
@@ -110,12 +109,10 @@ quant_call("1211201020", "CultivatedGinseng_QTY.csv")
 quant_call("1211201090", "WildGinseng_QTY.csv")
 #Missing call?
 
-#Cranberries, Blueberries, Etc, Fresh
-#Note did not include blueberries so does not fit wiht val call
-#quant_call("0810400050", "QTY_Cranberries.csv")
-
 quant_call("1103130020", "CornmealCorn_QTY.csv")
 quant_call("1103130060", "OtherCorn_QTY.csv")
+
+quant_call("0401100000", "QTY_Milk.csv")
 
 
 

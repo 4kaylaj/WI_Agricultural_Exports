@@ -15,6 +15,7 @@ master_soybean=pd.read_csv("Master_Soybean.csv")
 master_whey=pd.read_csv("Master_Whey.csv")
 master_gin=pd.read_csv("Master_Gin.csv")
 master_corn=pd.read_csv("Master_Corn.csv")
+master_milk=pd.read_csv("Master_Milk.csv")
 
 #Add price column and WI QTY Column
 def clean (df):
@@ -30,7 +31,8 @@ clean(master_soybeanFM)
 clean(master_soybean)
 clean(master_whey)
 clean(master_gin)
-#clean(master_corn)
+clean(master_corn)
+clean(master_milk)
 #%%
 def plot(df,time, quantity, title,figure):
     fig, (ax1, ax2) = plt.subplots(2)
@@ -49,11 +51,12 @@ def plot(df,time, quantity, title,figure):
     fig.savefig(figure)
 #%%
     
-plot(master_soybeanFM,"2019-01-01", "Quantity (Kg)", "Soybean Flour Exports", 'SoybeanFM.png')
-plot(master_soybean,"2018-01-01", "Soybean Exports", 'Soybean.png')
-plot(master_whey,"2018-01-01", "Whey Exports", "Whey.png")
-plot(master_gin,"2018-01-01", "Ginseng Exports","Ginseng.png")
-#plot(master_corn, "Corn Exports", "Corn.png")
+plot(master_soybeanFM,"2019-01-01", "Quantity (Kg)","Soybean Flour Exports", 'SoybeanFM.png')
+plot(master_soybean,"2018-01-01","Quantity (Kg)","Soybean Exports", 'Soybean.png')
+plot(master_whey,"2018-01-01","Quantity (Kg)","Whey Exports", "Whey.png")
+plot(master_gin,"2018-01-01","Quantity (Kg)","Ginseng Exports","Ginseng.png")
+plot(master_corn,"2018-01-01","Quantity (Kg)","Corn Exports","Corn.png")
+plot(master_milk,"2019-01-01","Quantity (L)","Milk Exports","Milk.png")
 #%%
 
 

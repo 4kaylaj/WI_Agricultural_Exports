@@ -40,9 +40,7 @@ join_files("Ginseng.csv", "VQ_Ginseng.csv")
 
 join_files("Corn.csv", "VQ_Corn.csv")
 
-
-
-#join_files("Cranberries.csv", "VQ_Cranberries.csv")
+join_files("Milk.csv", "VQ_Milk.csv")
 
 #%%
 

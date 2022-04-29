@@ -15,6 +15,7 @@ soybean_df=pd.read_csv("VQ_Soybeans.csv")
 whey_df=pd.read_csv("VQ_Whey.csv", dtype={"E_COMMODITY":str})
 gin_df=pd.read_csv("VQ_Ginseng.csv")
 corn_df=pd.read_csv("VQ_Corn.csv")
+milk_df=pd.read_csv("VQ_Milk.csv")
 
 #%%
 #SoybeanFM
@@ -40,7 +41,7 @@ drop_list = ["QTY_1_YR", "UNIT_QY1","E_COMMODITY.1"]
 WISoybeanFM = WISoybeanFM.drop(columns=drop_list)
 
 #Rename Columns for calarity
-VSoybeanFM = VSoybeanFM.rename(columns={'ALL_VAL_YR':'Nationa_Value'})
+VSoybeanFM = VSoybeanFM.rename(columns={'ALL_VAL_YR':'National_Value'})
 WISoybeanFM = WISoybeanFM.rename(columns={'ALL_VAL_YR':'WI_Value'})
 #%%
 #Merge the individual SoybeanFM dataframes into a master dataframe
@@ -102,7 +103,7 @@ drop_list = ["QTY_1_YR", "UNIT_QY1", "E_COMMODITY.1"]
 WISoybean = WISoybean.drop(columns=drop_list)
 
 #Rename Columns for calarity
-VSoybean = VSoybean.rename(columns={'ALL_VAL_YR':'Nationa_Value'})
+VSoybean = VSoybean.rename(columns={'ALL_VAL_YR':'National_Value'})
 WISoybean = WISoybean.rename(columns={'ALL_VAL_YR':'WI_Value'})
 #%%
 #Merge the individual Soybean dataframes into a master dataframe
@@ -162,7 +163,7 @@ drop_list = ["QTY_1_YR", "UNIT_QY1", "E_COMMODITY.1"]
 WIWhey = WIWhey.drop(columns=drop_list)
 
 #Rename Columns for calarity
-VWhey = VWhey.rename(columns={'ALL_VAL_YR':'Nationa_Value'})
+VWhey = VWhey.rename(columns={'ALL_VAL_YR':'National_Value'})
 WIWhey = WIWhey.rename(columns={'ALL_VAL_YR':'WI_Value'})
 #%%
 #Because there are multiple quantity values that need to be aggregated
@@ -268,7 +269,7 @@ Master_Whey.to_csv("Master_Whey.csv", index=False)
 
 #%%
 #Ginseng
-##Pull out grouped pieces of CSV fvariable into dataframes for
+##Pull out grouped pieces of CSV variable into dataframes for
 #quantity, nation value, and WI value
 VGin = gin_df.query("STATE=='-'")
 WIGin = gin_df.query("STATE=='WI'")
@@ -285,14 +286,14 @@ drop_list = ["QTY_1_YR","UNIT_QY1","E_COMMODITY.1"]
 WIGin = WIGin.drop(columns=drop_list)
 
 #Rename Columns for calarity
-VGin = VGin.rename(columns={'ALL_VAL_YR':'Nationa_Value'})
+VGin = VGin.rename(columns={'ALL_VAL_YR':'National_Value'})
 WIGin = WIGin.rename(columns={'ALL_VAL_YR':'WI_Value'})
 #%%
 #Because there are multiple quantity values that need to be aggregated
 #to match the value varialbe, differnt kinds of ginseng quantities need
 #be pulled out into seperate data frames
 
-#Select whey quantity types
+#Select ginseng quantity types
 QCultGin = gin_df.loc[gin_df["E_COMMODITY"] == 1211201090]
 QWildGin = gin_df.loc[gin_df["E_COMMODITY"] == 1211201020]
 
@@ -354,106 +355,167 @@ print(Master_Gin['_merge'].value_counts())
 Master_Gin = Master_Gin.drop(columns= ["_merge","E_COMMODITY",
                                          "E_COMMODITY_LDESC", "STATE"])
 
-Master_Gin = Master_Gin.rename(columns= {'ALL_VAL_YR':'WI_Value'})
-
 Master_Gin.to_csv("Master_Gin.csv", index=False)
 
 #%%
-#Corn NEED TO CLEAN THIS
-#Pull out quantities
+#Corn
+#Pull out grouped pieces of CSV fvariable into dataframes for
+#quantity, nation value, and WI value
 QCorn = corn_df.loc[corn_df["QTY_1_YR"] >= 0]
-#Drop columns
-drop_list = ["STATE", "ALL_VAL_YR",
-             "QTY_2_YR", "QTY_2_YR_FLAG"]
-QCorn = QCorn.drop(columns=drop_list)
 VCorn = corn_df.query("STATE=='-'")
 WICorn = corn_df.query("STATE=='WI'")
 
-#Sort
+#Sort dataframes by the 'Year' and 'Month" columns
 QCorn = QCorn.sort_values(['YEAR','MONTH'])
 VCorn = VCorn.sort_values(['YEAR','MONTH'])
-WICorn = WICorn.sort_values(['YEAR','MONTH'])
+WICorn = WICorn.sort_values(["YEAR", "MONTH"])
 
-#Select Differnt Kinds of Whey Quantity
+#Clean: drop uneccesary columns in dataframes
+drop_list = ['STATE','ALL_VAL_YR','E_COMMODITY.1']
+QCorn = QCorn.drop(columns=drop_list)
+
+drop_list = ['QTY_1_YR','UNIT_QY1','STATE']
+VCorn = VCorn.drop(columns=drop_list)
+
+drop_list = ['QTY_1_YR','UNIT_QY1','STATE']
+WICorn = WICorn.drop(columns=drop_list)
+
+#Rename Columns for calarity
+VCorn = VCorn.rename(columns={'ALL_VAL_YR':'National_Value'})
+WICorn = WICorn.rename(columns={'ALL_VAL_YR':'WI_Value'})
+
+#%%
+#Because there are multiple quantity values that need to be aggregated
+#to match the value varialbe, differnt kinds of corn quantities need
+#be pulled out into seperate data frames
+
+#Select corn quantity types
+#Select Differnt Kinds of Corn Quantities
 QCornmealCorn = QCorn.loc[QCorn["E_COMMODITY"] == 1103130020]
-#Rename Columns
-QCronmealCorn = QCornmealCorn.rename(columns= {"QTY_1_YR":'Cornmeal_QTY'})
-
-#Drop Columns
-drop_list = ["E_COMMODITY","E_COMMODITY_LDESC",
-          "QTY_1_YR_FLAG","E_COMMODITY.1"]
-
-QCornmealCorn = QCornmealCorn.drop(columns=drop_list)
-
-QCornmealCorn = QCornmealCorn.rename(columns= {'QTY_1_YR':'Cornmeal_QTY'})
-
-#Missing data
 QOtherCorn = QCorn.loc[QCorn["E_COMMODITY"] == 1103130060]
 
-drop_list = ["E_COMMODITY","E_COMMODITY_LDESC",
-          "QTY_1_YR_FLAG","E_COMMODITY.1"]
+#Rename Columns
+QCornmealCorn = QCornmealCorn.rename(columns= {"QTY_1_YR":'Cornmeal_QTY',
+                                               "UNIT_QY1":"CornmealCorn_Unit"})
+QOtherCorn = QOtherCorn.rename(columns= {'QTY_1_YR':'Other_QTY',
+                                         "UNIT_QY1":"OtherCorn_Unit"})
+#Clean: drop uneccesary columns in dataframes
+drop_list = ["E_COMMODITY","E_COMMODITY_LDESC"]
+QCornmealCorn = QCornmealCorn.drop(columns=drop_list)
 
-QOtherCorn = QOtherCorn.rename(columns= {'QTY_1_YR':'Other_QTY'})
-
+drop_list = ["E_COMMODITY","E_COMMODITY_LDESC"]
 QOtherCorn = QOtherCorn.drop(columns=drop_list)
 #%%
 #Start merging differnt kinds of corn together
-master_corn = QCornmealCorn.merge(QOtherCorn,
+Master_Corn = QCornmealCorn.merge(QOtherCorn,
                                     on=['YEAR', 'MONTH'],
                                     how='outer',
                                     validate="m:m",
                                     indicator=True)
 
 print("Check Merge:")
-print(master_corn['_merge'].value_counts())
+print(Master_Corn['_merge'].value_counts())
 
 drop_list=["_merge"]
-master_corn = master_corn.drop(columns=drop_list)
-                              
+Master_Corn = Master_Corn.drop(columns=drop_list)
+#%%                          
 #Sum Quantities to HS Level of Values
 sum_list = ["Cornmeal_QTY","Other_QTY"]
-master_corn['QTY_1_YR'] = master_corn[sum_list].sum(axis=1)
+Master_Corn['QTY_1_YR'] = Master_Corn[sum_list].sum(axis=1)
 #%%
-#Merge VCorn onto onto Master
-master_corn = master_corn.merge(VCorn,
+#Merge VCorn onto onto master
+Master_Corn = Master_Corn.merge(VCorn,
                                     on=['YEAR', 'MONTH'],
                                     how='outer',
                                     validate="m:m",
                                     indicator=True)
 #Check Merge
 print("Check Merge:")
-print(master_corn['_merge'].value_counts())
+print(Master_Corn['_merge'].value_counts())
 
-#Clean Master DF
-master_corn = master_corn.drop(columns= ["_merge","E_COMMODITY",
-                                         "E_COMMODITY_LDESC","STATE",
-                                         "QTY_1_YR_FLAG",
-                                         "QTY_2_YR","QTY_2_YR_FLAG"])
+drop_list = ['_merge','E_COMMODITY_LDESC','E_COMMODITY',
+             "E_COMMODITY.1",]
+Master_Corn = Master_Corn.drop(columns=drop_list)
 
-#Rename Column
-master_corn = master_corn.rename(columns= {'ALL_VAL_YR':'National_Value'})
 #%%
 #Add WI data
-master_corn = master_corn.merge(WICorn,
+Master_Corn = Master_Corn.merge(WICorn,
                                           on=['YEAR', 'MONTH'],
                                           how='outer',
                                           validate='m:m',
                                           indicator=True)
 
 print("Check Merge:")
-print(master_corn['_merge'].value_counts())
+print(Master_Corn['_merge'].value_counts())
 
-master_corn = master_corn.drop(columns= ["_merge","E_COMMODITY",
-                                         "E_COMMODITY_LDESC", "STATE",
-                                         "QTY_1_YR", "QTY_1_YR_FLAG",
-                                         "QTY_2_YR", "QTY_2_YR_FLAG"])
+Master_Corn = Master_Corn.drop(columns= ["_merge","E_COMMODITY",
+                                         "E_COMMODITY_LDESC", "E_COMMODITY.1"])
 
-master_corn = master_corn.rename(columns= {'ALL_VAL_YR':'WI_Value'})
+Master_Corn.to_csv("Master_Corn.csv", index=False)
+#%%
+#Milk
+#Pull out grouped pieces of CSV fvariable into dataframes for
+#quantity, nation value, and WI value
+QMilk = milk_df.loc[soybeanFM_df["QTY_1_YR"] >= 0]
+VMilk = milk_df.query("STATE=='-'")
+WIMilk = milk_df.query("STATE=='WI'")
 
-master_corn.to_csv("Master_Corn.csv", index=False)
+#Sort dataframes by the 'Year' and 'Month" columns
+QMilk = QMilk.sort_values(['YEAR','MONTH'])
+VMilk = VMilk.sort_values(['YEAR','MONTH'])
+WIMilk = WIMilk.sort_values(['YEAR','MONTH'])
+
+#Clean: drop uneccesary columns in dataframes
+drop_list = ["STATE", "ALL_VAL_YR", "E_COMMODITY.1"]
+QMilk = QMilk.drop(columns=drop_list)
+
+drop_list = ["QTY_1_YR", "UNIT_QY1", "STATE", "E_COMMODITY.1"]
+VMilk = VMilk.drop(columns=drop_list)
+
+drop_list = ["QTY_1_YR", "UNIT_QY1","E_COMMODITY.1"]
+WIMilk = WIMilk.drop(columns=drop_list)
+
+#Rename Columns for calarity
+VMilk = VMilk.rename(columns={'ALL_VAL_YR':'National_Value'})
+WIMilk = WIMilk.rename(columns={'ALL_VAL_YR':'WI_Value'})
+#%%
+#Merge the individual milk dataframes into a master dataframe
+Master_Milk = VMilk.merge(QMilk,
+                                    on=['YEAR', 'MONTH'],
+                                    how='outer',
+                                    validate="m:m",
+                                    indicator=True)
+
+#Check Merge
+print("Check Merge:")
+print(Master_Milk['_merge'].value_counts())
+
+#Clean Master DF
+drop_list = ["_merge","E_COMMODITY_LDESC_x","E_COMMODITY_x",
+             "E_COMMODITY_LDESC_y","E_COMMODITY_y" ]
+Master_Milk = Master_Milk.drop(columns=drop_list)
+#%%
+#Add WI data
+Master_Milk = Master_Milk.merge(WIMilk,
+                                          on=['YEAR', 'MONTH'],
+                                          how='outer',
+                                          validate='m:m',
+                                          indicator=True)
+
+print("Check Merge:")
+print(Master_Milk['_merge'].value_counts())
+#%%
+#Clean Master DF
+drop_list = ["_merge","E_COMMODITY","E_COMMODITY_LDESC", "STATE"]
+Master_Milk = Master_Milk.drop(columns= drop_list )
+
+#Write out SoybeanFM master dataframe to a CSV file
+Master_Milk.to_csv("Master_Milk.csv", index=False)
+
+#%%
 #Got help from
 #https://www.stackvidhya.com/select-rows-from-dataframe/
-
+#%%
 
 
 
