@@ -32,26 +32,27 @@ clean(master_whey)
 clean(master_gin)
 #clean(master_corn)
 #%%
-def plot(df,title,figure):
+def plot(df,time, quantity, title,figure):
     fig, (ax1, ax2) = plt.subplots(2)
     ax1.plot(df["date"], df["QTY_1_YR"])
     ax2.plot(df["date"], df["WI_QTY"])
-    ax1.axvline(pd.Timestamp("2019-01-01"),color="red", linewidth=5, alpha=.3)
-    ax2.axvline(pd.Timestamp("2019-01-01"),color="red", linewidth=5, alpha=.3)
+    ax1.axvline(pd.Timestamp(time),color="red", linewidth=5, alpha=.3)
+    ax2.axvline(pd.Timestamp(time),color="red", linewidth=5, alpha=.3)
     ax1.set_xlabel('Year')
     ax2.set_xlabel('Year')
-    ax1.set_ylabel('Quantity')
-    ax2.set_ylabel('Quantity')
+    ax1.set_ylabel(quantity)
+    ax2.set_ylabel(quantity)
     ax1.set_title('National Exports')
     ax2.set_title('WI Exports')
     fig.suptitle(title)
     fig.tight_layout()
     fig.savefig(figure)
+#%%
     
-plot(master_soybeanFM, "Soybean (Flour/Meal) Exports", 'SoybeanFM.png')
-plot(master_soybean, "Soybean Exports", 'Soybean.png')
-plot(master_whey, "Whey Exports", "Whey.png")
-plot(master_gin, "Ginseng Exports","Ginseng.png")
+plot(master_soybeanFM,"2019-01-01", "Quantity (Kg)", "Soybean Flour Exports", 'SoybeanFM.png')
+plot(master_soybean,"2018-01-01", "Soybean Exports", 'Soybean.png')
+plot(master_whey,"2018-01-01", "Whey Exports", "Whey.png")
+plot(master_gin,"2018-01-01", "Ginseng Exports","Ginseng.png")
 #plot(master_corn, "Corn Exports", "Corn.png")
 #%%
 

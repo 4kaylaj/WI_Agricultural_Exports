@@ -69,7 +69,7 @@ def quant_call(hs_code, filename):
   api = 'https://api.census.gov/data/timeseries/intltrade/exports/hs'
   #Set varialbes
   #Cannot get QTY varaiable to work. Check error
-  var_str = "E_COMMODITY,E_COMMODITY_LDESC,QTY_1_YR,QTY_1_YR_FLAG,QTY_2_YR,QTY_2_YR_FLAG,YEAR,MONTH"
+  var_str = "E_COMMODITY_LDESC,QTY_1_YR,UNIT_QY1,YEAR,MONTH"
   #Set key
   key_value = "881eddebb146c5b0babd4b75ceea21da104a4ad3"
   #Set payload 
@@ -94,18 +94,21 @@ def quant_call(hs_code, filename):
 #Run api_call function for Flour/Meal Soybeans
 quant_call("1208100000", "QTY_FlourMealSoybean.csv")
 
+
 #Soybeans, Whether or Not Broken (1201)
 quant_call("1201100000", "QTY_Soybeans.csv")
+#Need another call here
 
 #Whey
-quant_call("0404100500", "ModWhey_QTY.csv")
-quant_call("0404100850", "ModOtherWhey_QTY.csv")
-quant_call("0404102000", "FluidOtherWhey_QTY.csv")
-quant_call("0404104000", "DriedOtherWhey_QTY.csv")
+quant_call("0404100500", "ModWhey_QTY.csv") #Kg
+quant_call("0404100850", "ModOtherWhey_QTY.csv") #Kg
+quant_call("0404102000", "FluidOtherWhey_QTY.csv") #liter
+quant_call("0404104000", "DriedOtherWhey_QTY.csv") #Kg
 
 #Ginseng
 quant_call("1211201020", "CultivatedGinseng_QTY.csv")
 quant_call("1211201090", "WildGinseng_QTY.csv")
+#Missing call?
 
 #Cranberries, Blueberries, Etc, Fresh
 #Note did not include blueberries so does not fit wiht val call
