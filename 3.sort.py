@@ -277,6 +277,7 @@ WIGin = gin_df.query("STATE=='WI'")
 VGin = VGin.sort_values(['YEAR','MONTH'])
 WIGin = WIGin.sort_values(['YEAR','MONTH'])
 
+#Clean: drop uneccesary columns in dataframes
 drop_list = ["QTY_1_YR","UNIT_QY1", "E_COMMODITY.1"]
 VGin = VGin.drop(columns=drop_list)
 
@@ -295,6 +296,13 @@ WIGin = WIGin.rename(columns={'ALL_VAL_YR':'WI_Value'})
 QCultGin = gin_df.loc[gin_df["E_COMMODITY"] == 1211201090]
 QWildGin = gin_df.loc[gin_df["E_COMMODITY"] == 1211201020]
 
+#Clean: drop uneccesary columns in dataframes
+drop_list = ["STATE","ALL_VAL_YR","E_COMMODITY.1"]
+QCultGin = QCultGin.drop(columns=drop_list)
+
+drop_list = ["STATE", "ALL_VAL_YR", "E_COMMODITY.1"]
+QWildGin = QWildGin.drop(columns=drop_list)
+
 #Rename columns for clarity
 QCultGin = QCultGin.rename(columns= {"QTY_1_YR":'CultGin_QTY',
                                      "UNIT_QY1":"CultGin_Unit"})
@@ -310,33 +318,15 @@ Master_Gin = QCultGin.merge(QWildGin,
 
 print("Check Merge:")
 print(Master_Gin['_merge'].value_counts())
-#%%
-drop_list=["_merge"]
+
+drop_list=["_merge","E_COMMODITY_LDESC_x","E_COMMODITY_x",
+           "E_COMMODITY_LDESC_y","E_COMMODITY_y"]
 Master_Gin = Master_Gin.drop(columns=drop_list)
                               
 #Sum Quantities to HS Level of Values
 sum_list = ["CultGin_QTY","WildGin_QTY"]
 Master_Gin['QTY_1_YR'] = Master_Gin[sum_list].sum(axis=1)
-#%%
-VGin = gin_df.query("STATE=='-'")
-WIGin = gin_df.query("STATE=='WI'")
 
-#Sort
-VGin = VGin.sort_values(['YEAR','MONTH'])
-WIGin = WIGin.sort_values(['YEAR','MONTH'])
-
-drop_list = ["QTY_1_YR", "QTY_1_YR_FLAG", "QTY_2_YR",
-             "QTY_2_YR_FLAG", "E_COMMODITY.1"]
-VGin = VGin.drop(columns=drop_list)
-
-VGin = VGin.rename(columns= {"ALL_VAL-YR":'National_Value'})
-
-drop_list = ["QTY_1_YR", "QTY_1_YR_FLAG", "QTY_2_YR",
-             "QTY_2_YR_FLAG", "E_COMMODITY.1"]
-WIGin = WIGin.drop(columns=drop_list)
-
-WIGin = WIGin.rename(columns= {"ALL_VAL-YR":'WI_Value'})
-#%%
 #Merge VGin onto onto Master
 Master_Gin = Master_Gin.merge(VGin,
                                     on=['YEAR', 'MONTH'],
@@ -351,10 +341,7 @@ print(Master_Gin['_merge'].value_counts())
 Master_Gin = Master_Gin.drop(columns= ["_merge","E_COMMODITY",
                                          "E_COMMODITY_LDESC", "STATE"])
 
-#Rename Column
-Master_Gin = Master_Gin.rename(columns= {'ALL_VAL_YR':'National_Value'})
-#%%
-#Add WI data
+#Add WI data to master dataframe 
 Master_Gin = Master_Gin.merge(WIGin,
                                           on=['YEAR', 'MONTH'],
                                           how='outer',
@@ -371,7 +358,6 @@ Master_Gin = Master_Gin.rename(columns= {'ALL_VAL_YR':'WI_Value'})
 
 Master_Gin.to_csv("Master_Gin.csv", index=False)
 
-#%%
 #%%
 #Corn NEED TO CLEAN THIS
 #Pull out quantities
