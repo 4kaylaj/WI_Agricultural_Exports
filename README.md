@@ -26,6 +26,25 @@ This project used Python 3.9 for data handling and visualization. It uses 4 main
 4. _figure.py:_   The figure.py starts by backing out quantity values for Wisconsin exports. Given that USA Trade® Online does not provide export quantity values by state, this script takes national export values and divides them by national export quantities to find national pricing levels for a given commodity. Assuming that national pricing is similar to Wisconsin pricing, the script then finds quantity values for Wisconsin exports by dividing Wisconsin export values by national pricing. The rest of the script creates figures to outline export quantities for a given commodity at both the national and state level.
 
 ## __Results__
+Overall, the results demonstrate an association between the U.S.-China trade war and a decline in Wisconsin agricultural exports. 
+
+### __Milk__
+![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/Milk.png?raw=true "Milk Exports")
+
+### __Whey__
+![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/Whey.png?raw=true "Whey Exports")
+
+### __Ginseng__
+![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/Ginseng.png?raw=true "Ginseng Exports")
+
+### __Ginseng__
+![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/Ginseng.png?raw=true "Ginseng Exports")
+
+### __Corn__
+![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/Corn.png?raw=true "Corn Exports")
+
+### __Soybean Flour__
+![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/SoybeanFM.png?raw=true "Soybean Flour Exports")
 
 ## __References__
 
