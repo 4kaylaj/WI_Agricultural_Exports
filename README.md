@@ -4,7 +4,7 @@
 __Analyzing The Impact of U.S.-China Trade Wars on Wisconsin Agricultural Exports__
 =====
 ## __Background__
-On July 6th, 2018 the U.S.-China trade wars were initiated when the United States imposed a 25% tariff on $34billion worth of Chinese imports. China responded by also imposing a 25% tariff on $34billion worth of U.S. imports. Trade tension continued to escalate and hit a peak at the end of 2019 with the United States having imposed tariffs on more than $360 billion worth of Chinese goods and China having imposed duties worth $110 billion on US products. Many of China’s retaliatory tariffs were targeted at U.S. agricultural products.
+On July 6th, 2018 the U.S.-China trade wars were initiated when the United States imposed a 25% tariff on $34billion worth of Chinese imports[^1]. China responded by also imposing a 25% tariff on $34billion worth of U.S. imports. Trade tension continued to escalate and hit a peak at the end of 2019 with the United States having imposed tariffs on more than $360 billion worth of Chinese goods and China having imposed duties worth $110 billion on US products. Many of China’s retaliatory tariffs were targeted at U.S. agricultural products.
 
 Wisconsin has a strong agricultural industry and ranks 13th among U.S. states in food, forestry, and agricultural exports.  In general, the state relies heavily on exports as a source of economic development and was the 19th largest state exporter of goods in 2018. In 2018 good exports accounts for 6.7% of Wisconsin GDP and employment data estimates that in 2016 111,000 were supported by good Wisconsin good exports. However, Wisconsin trade has relied heavily on Canada, Mexico, and China, its largest markets.  
 
@@ -17,7 +17,7 @@ All data came from the U.S. Census Bureau’s USA Trade® Online. Specifics abou
 ## __Data Handeling and Processing__
 This project used Python 3.9 for data handling and visualization. It uses 4 main scripts:
 
-1. _collect.py:_ This script is used to pull export data from the U.S. Census Bureau’s USA Trade® Online.  It uses the Census API to retrieve export commodities by Harmonized System (HS) code and then stores the commodity data in CSV files. Although this project examines several commodities, exporting data into a CSV file allows the functions defined in this script to be useful for anyone seeking to retrieve general export data from USA Trade® Online. It is important to note that when doing API calls to USA Trade® Online, there are different endpoints for different variables. This project used two different endpoints to get export commodities’ values and quantities by HS code. The International Trade Data API User Guide can be found here for more details about their API system.
+1. _collect.py:_ This script is used to pull export data from the U.S. Census Bureau’s USA Trade® Online. It uses the Census API to retrieve export commodities by Harmonized System (HS) code and then stores the commodity data in CSV files. Although this project examines several commodities, exporting data into a CSV file allows the functions defined in this script to be useful for anyone seeking to retrieve general export data from USA Trade® Online. It is important to note that when doing API calls to USA Trade® Online, there are different endpoints for different variables. This project used two different endpoints to get export commodities’ values and quantities by HS code. The International Trade Data API User Guide can be found here for more details about their API system.
 
 2. _join.py:_ The join script joins together CSV files by product or family of products. In this way, all quantity and value information for a 6-digit HS commodity is stored in one CSV file.
 
@@ -39,7 +39,7 @@ This figure demonstrates the impact of the trade wars on whey exports. Although 
 ![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/Whey.png?raw=true "Whey Exports")
 
 ### __Ginseng__
-While there is a decline in Wisconsin Ginseng exports, the results are not as clear as other commodities. Although the U.S.-China trade wars played a role in decreasing ginseng exports, the pandemic also could have played a role in this decrease as many people give Ginseng a gift when they travel over the holidays. 
+While there is a decline in Wisconsin ginseng exports, the results are not as clear as other commodities. Although the U.S.-China trade wars played a role in decreasing ginseng exports, the pandemic also could have played a role in this decrease as many people give Ginseng a gift when they travel over the holidays. 
 
 ![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/Ginseng.png?raw=true "Ginseng Exports")
 
