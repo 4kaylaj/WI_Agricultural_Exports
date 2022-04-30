@@ -28,22 +28,29 @@ This project used Python 3.9 for data handling and visualization. It uses 4 main
 ## __Results__
 Overall, the results demonstrate an association between the U.S.-China trade war and a decline in Wisconsin agricultural exports. 
 
-### __Milk__
+### __Milk__: 
+This figure demonstrates the impact of the trade wars on milk exports with less than 1% fat content. Although missing data is problematic, the decrease in milk exports at the height of the trade wars is clearly seen.
+
 ![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/Milk.png?raw=true "Milk Exports")
 
 ### __Whey__
+This figure demonstrates the impact of the trade wars on whey exports. Although there is a clear decrease in exports, the decline is not as drastic as other commodities. 
+
 ![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/Whey.png?raw=true "Whey Exports")
 
 ### __Ginseng__
-![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/Ginseng.png?raw=true "Ginseng Exports")
+While there is a decline in Wisconsin Ginseng exports, the results are not as clear as other commodities. Although the U.S.-China trade wars played a role in decreasing ginseng exports, the pandemic also could have played a role in this decrease as many people give Ginseng a gift when they travel over the holidays. 
 
-### __Ginseng__
 ![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/Ginseng.png?raw=true "Ginseng Exports")
 
 ### __Corn__
+Missing data is problematic when it comes to assessing the impact of the trade wars on Wisconsin corn exports. Although there was a decrease in national corn exports from 2018-2019. This also could have been part of a larger trend that seemed to have started in 2017. Further analysis is needed to fully understand the impact of the trade wars on corn exports. 
+
 ![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/Corn.png?raw=true "Corn Exports")
 
 ### __Soybean Flour__
+This figure demonstrates the impact of the trade wars on soybean flour exports. Compared with other assessed commodities, the impact of the trade wars on Wisconsin soybean flour seems to have been most stark with no rebound. 
+
 ![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/SoybeanFM.png?raw=true "Soybean Flour Exports")
 
 ## __References__
