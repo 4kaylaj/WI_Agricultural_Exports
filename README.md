@@ -4,9 +4,9 @@
 __Analyzing The Impact of U.S.-China Trade Wars on Wisconsin Agricultural Exports__
 =====
 ## __Background__
-On July 6th, 2018 the U.S.-China trade wars were initiated when the United States imposed a 25% tariff on $34billion worth of Chinese imports[^1]. China responded by also imposing a 25% tariff on $34billion worth of U.S. imports. Trade tension continued to escalate and hit a peak at the end of 2019 with the United States having imposed tariffs on more than $360 billion worth of Chinese goods and China having imposed duties worth $110 billion on US products. Many of China’s retaliatory tariffs were targeted at U.S. agricultural products.
+On July 6th, 2018 the U.S.-China trade wars were initiated when the United States imposed a 25% tariff on $34billion worth of Chinese imports.[^1] China responded by also imposing a 25% tariff on $34billion worth of U.S. imports. Trade tension continued to escalate and hit a peak at the end of 2019 with the United States having imposed tariffs on more than $360 billion worth of Chinese goods and China having imposed duties worth $110 billion on US products.[^2] Many of China’s retaliatory tariffs were targeted at U.S. agricultural products.
 
-Wisconsin has a strong agricultural industry and ranks 13th among U.S. states in food, forestry, and agricultural exports.  In general, the state relies heavily on exports as a source of economic development and was the 19th largest state exporter of goods in 2018. In 2018 good exports accounts for 6.7% of Wisconsin GDP and employment data estimates that in 2016 111,000 were supported by good Wisconsin good exports. However, Wisconsin trade has relied heavily on Canada, Mexico, and China, its largest markets.  
+Wisconsin has a strong agricultural industry and ranks 13th among U.S. states in food, forestry, and agricultural exports.[^3] In general, the state relies heavily on exports as a source of economic development and was the 19th largest state exporter of goods in 2018.[^4] In 2018 good exports accounts for 6.7% of Wisconsin GDP and employment data estimates that in 2016 111,000 were supported by good Wisconsin good exports. [^5] However, Wisconsin trade has relied heavily on Canada, Mexico, and China, its largest markets. [^6]
 
 ## __Objectives__
 This project seeks to examine how the U.S-China trade wars impacted Wisconsin agricultural exports. Specifically, it will outline an impact visualization on key Wisconsin agricultural commodities including milk, whey, ginseng, corn, soybean flour/meal, and soybeans.
@@ -53,5 +53,16 @@ This figure demonstrates the impact of the trade wars on soybean flour exports. 
 
 ![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/SoybeanFM.png?raw=true "Soybean Flour Exports")
 
-## __References__
+## __Footnotes__
 
+[^1]: “What Is the US-China Trade War?,” South China Morning Post, May 28, 2021, https://www.scmp.com/economy/china-economy/article/3078745/what-us-china-trade-war-how-it-started-and-what-inside-phase.
+
+[^2]: Ibid.
+
+[^3]: “Export Statistics,” DATCP Home Export Statistics, accessed May 3, 2022, https://datcp.wi.gov/Pages/AgDevelopment/ExportStatistics.aspx.
+
+[^4]: “State Benefits of Trade: Wisconsin.” United States Trade Representative. Accessed May 3, 2022. https://ustr.gov/map/state-benefits/wi. 
+
+[^5]: Ibid.
+
+[^6]: Ibid.
