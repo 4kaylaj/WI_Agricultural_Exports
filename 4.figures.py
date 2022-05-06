@@ -7,7 +7,7 @@ Created on Thu Apr 21 17:48:06 2022
 """
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
+
 
 #Import CSV files into variables
 master_soybeanFM=pd.read_csv("Master_SoybeanFM.csv")
@@ -19,7 +19,7 @@ master_milk=pd.read_csv("Master_Milk.csv")
 
 #Add price column and WI QTY Column
 def clean (df):
-    df["price"] = df["National_Value"]/df["QTY_1_YR"]
+    df["price"] = df["National_Value"]/df["QTY_1_MO"]
     df["WI_QTY"] = df["WI_Value"]/df["price"]
     df['date'] = df["MONTH"].astype(str) + "/" + df["YEAR"].astype(str)
     date = pd.to_datetime(df['date'])
@@ -34,10 +34,74 @@ clean(master_gin)
 clean(master_corn)
 clean(master_milk)
 #%%
+#Compute annual average
+#Compute soybeanFM annual averages
+mean_W = master_soybeanFM.groupby("YEAR")["WI_QTY"].mean()
+mean_W = mean_W.rename("WI_Mean")
+
+mean_N = master_soybeanFM.groupby("YEAR")["QTY_1_MO"].mean()
+mean_N = mean_N.rename('NAT_Mean')
+
+master_soybeanFM = master_soybeanFM.merge(mean_W, left_on='YEAR', right_index=True)
+master_soybeanFM = master_soybeanFM.merge(mean_N, left_on='YEAR', right_index=True)
+
+#Compute soybean annual averages
+mean_W = master_soybean.groupby("YEAR")["WI_QTY"].mean()
+mean_W = mean_W.rename("WI_Mean")
+
+mean_N = master_soybean.groupby("YEAR")["QTY_1_MO"].mean()
+mean_N = mean_N.rename('NAT_Mean')
+
+master_soybean = master_soybean.merge(mean_W, left_on='YEAR', right_index=True)
+master_soybean = master_soybean.merge(mean_N, left_on='YEAR', right_index=True)
+
+#Compute whey annual average
+mean_W = master_whey.groupby("YEAR")["WI_QTY"].mean()
+mean_W = mean_W.rename("WI_Mean")
+
+mean_N = master_whey.groupby("YEAR")["QTY_1_MO"].mean()
+mean_N = mean_N.rename('NAT_Mean')
+
+master_whey = master_whey.merge(mean_W, left_on='YEAR', right_index=True)
+master_whey = master_whey.merge(mean_N, left_on='YEAR', right_index=True)
+
+#Compute gin annual average
+mean_W = master_gin.groupby("YEAR")["WI_QTY"].mean()
+mean_W = mean_W.rename("WI_Mean")
+
+mean_N = master_gin.groupby("YEAR")["QTY_1_MO"].mean()
+mean_N = mean_N.rename('NAT_Mean')
+
+master_gin = master_gin.merge(mean_W, left_on='YEAR', right_index=True)
+master_gin = master_gin.merge(mean_N, left_on='YEAR', right_index=True)
+
+#Compute corn annual average
+mean_W = master_corn.groupby("YEAR")["WI_QTY"].mean()
+mean_W = mean_W.rename("WI_Mean")
+
+mean_N = master_corn.groupby("YEAR")["QTY_1_MO"].mean()
+mean_N = mean_N.rename('NAT_Mean')
+
+master_corn = master_corn.merge(mean_W, left_on='YEAR', right_index=True)
+master_corn = master_corn.merge(mean_N, left_on='YEAR', right_index=True)
+
+#Compute milk annual average
+mean_W = master_milk.groupby("YEAR")["WI_QTY"].mean()
+mean_W = mean_W.rename("WI_Mean")
+
+mean_N = master_milk.groupby("YEAR")["QTY_1_MO"].mean()
+mean_N = mean_N.rename('NAT_Mean')
+
+master_milk = master_milk.merge(mean_W, left_on='YEAR', right_index=True)
+master_milk = master_milk.merge(mean_N, left_on='YEAR', right_index=True)
+#%%
+#%%
 def plot(df,time, quantity, title,figure):
     fig, (ax1, ax2) = plt.subplots(2)
-    ax1.plot(df["date"], df["QTY_1_YR"])
-    ax2.plot(df["date"], df["WI_QTY"])
+    ax1.plot(df["date"], df["QTY_1_MO"])
+    ax1.plot(df["date"], df["NAT_Mean"])
+    ax2.plot(df["date"],df["WI_QTY"])
+    ax2.plot(df["date"], df["WI_Mean"])
     ax1.axvline(pd.Timestamp(time),color="red", linewidth=5, alpha=.3)
     ax2.axvline(pd.Timestamp(time),color="red", linewidth=5, alpha=.3)
     ax1.set_xlabel('Year')
@@ -51,12 +115,12 @@ def plot(df,time, quantity, title,figure):
     fig.savefig(figure)
 #%%
     
-plot(master_soybeanFM,"2019-01-01", "Quantity (Kg)","Soybean Flour Exports", 'SoybeanFM.png')
+plot(master_soybeanFM,"2018-01-01", "Quantity (Kg)","Soybean Flour Exports", 'SoybeanFM.png')
 plot(master_soybean,"2018-01-01","Quantity (Kg)","Soybean Exports", 'Soybean.png')
 plot(master_whey,"2018-01-01","Quantity (Kg)","Whey Exports", "Whey.png")
 plot(master_gin,"2018-01-01","Quantity (Kg)","Ginseng Exports","Ginseng.png")
 plot(master_corn,"2018-01-01","Quantity (Kg)","Corn Exports","Corn.png")
-plot(master_milk,"2019-01-01","Quantity (L)","Milk Exports","Milk.png")
+plot(master_milk,"2018-01-01","Quantity (L)","Milk Exports","Milk.png")
 #%%
 
 

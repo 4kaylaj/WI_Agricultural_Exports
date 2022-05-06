@@ -12,20 +12,19 @@ Created on Wed Apr 20 15:00:23 2022
 #exporting data into a CSV file allows the functions to be useful
 #for anyone seeking to retrieve general export data from USA Trade Online.
 #%%
-#This script uses two modules: requests and pandas. 
+#Import requests and pandas modules 
 import requests
 import pandas as pd
 
 #%%
-#USA Trade Online has several endpoint options. Endpoints can be choosen
-#based on 
-#Define funtion to creat api call hs arguement to get value varialbe
+#Define a funtion to creat an api call using an hs code as arguement 
+#to get value varialbe
 def val_call(hs_code, filename):
     #Set api varialbe
   api = 'https://api.census.gov/data/timeseries/intltrade/exports/statehs'
   #Set varialbes
   #Cannot get QTY varaiable to work. Check error
-  var_str = "STATE,ALL_VAL_YR,E_COMMODITY,E_COMMODITY_LDESC,YEAR,MONTH"
+  var_str = "STATE,ALL_VAL_MO,E_COMMODITY,E_COMMODITY_LDESC,YEAR,MONTH"
   #Set key
   key_value = "881eddebb146c5b0babd4b75ceea21da104a4ad3"
   #Set payload 
@@ -70,7 +69,7 @@ def quant_call(hs_code, filename):
   api = 'https://api.census.gov/data/timeseries/intltrade/exports/hs'
   #Set varialbes
   #Cannot get QTY varaiable to work. Check error
-  var_str = "E_COMMODITY_LDESC,QTY_1_YR,UNIT_QY1,YEAR,MONTH"
+  var_str = "E_COMMODITY_LDESC,QTY_1_MO,UNIT_QY1,YEAR,MONTH"
   #Set key
   key_value = "881eddebb146c5b0babd4b75ceea21da104a4ad3"
   #Set payload 
