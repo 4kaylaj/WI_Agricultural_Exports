@@ -5,25 +5,19 @@ Created on Wed Apr 20 15:00:23 2022
 
 @author: kayla
 """
-#Overview:
-#This script is used to pull export data from the U.S. Census Bureau,
-#USA Trade Online by Harmonized System (HS) code and stores retrieved
-#data in CSV files. Although this project examines several commodities,
-#exporting data into a CSV file allows the functions to be useful
-#for anyone seeking to retrieve general export data from USA Trade Online.
+
 #%%
 #Import requests and pandas modules 
 import requests
 import pandas as pd
 
 #%%
-#Define a funtion to creat an api call using an hs code as arguement 
+#Define a funtion to create an api call using an hs code as arguement 
 #to get value varialbe
 def val_call(hs_code, filename):
     #Set api varialbe
   api = 'https://api.census.gov/data/timeseries/intltrade/exports/statehs'
   #Set varialbes
-  #Cannot get QTY varaiable to work. Check error
   var_str = "STATE,ALL_VAL_MO,E_COMMODITY,E_COMMODITY_LDESC,YEAR,MONTH"
   #Set key
   key_value = "881eddebb146c5b0babd4b75ceea21da104a4ad3"
@@ -44,7 +38,8 @@ def val_call(hs_code, filename):
   #Write dataframe to file
   dataframe.to_csv(filename,index=False)
 #%%
-#Run api_call function for Flour/Meal Soybeans
+#Run val_call function
+#Flour/Meal Soybeans
 val_call("120810", "FlourMealSoybean.csv")
 
 #Soybeans, Whether or Not Broken (1201)
@@ -63,12 +58,12 @@ val_call("110313", "Corn.csv")
 val_call("040110", "Milk.csv")
 
 #%%
-#Define funtion to creat api call with hs arguement to get quantity varialbe
+#Define a funtion to create an api call using an hs code as arguement 
+#to get quantity varialbe
 def quant_call(hs_code, filename):
   #Set api varialbe
   api = 'https://api.census.gov/data/timeseries/intltrade/exports/hs'
   #Set varialbes
-  #Cannot get QTY varaiable to work. Check error
   var_str = "E_COMMODITY_LDESC,QTY_1_MO,UNIT_QY1,YEAR,MONTH"
   #Set key
   key_value = "881eddebb146c5b0babd4b75ceea21da104a4ad3"
@@ -78,7 +73,6 @@ def quant_call(hs_code, filename):
   response=requests.get(api,payload)
   #Print results
   print(f"Status code: {response.status_code}")
-  #Convert QTY to 
   #Create a dataframe
   row_list = response.json()
   #Set column name list
@@ -91,10 +85,14 @@ def quant_call(hs_code, filename):
   df.to_csv(filename, index=False)
 
 #%%
-#Run api_call function for Flour/Meal Soybeans
+#Run quant_call function
+#Note: for some commodities, there are multiple quantity values 
+#that need to be aggregated to match the value variables. This is true
+#for whey, ginseng, and corn.
+#Flour/Meal Soybeans
 quant_call("1208100000", "QTY_FlourMealSoybean.csv")
 
-#Soybeans, Whether or Not Broken (1201)
+#Soybeans, Whether or Not Broken
 quant_call("1201100000", "QTY_Soybeans.csv")
 
 #Whey
@@ -106,11 +104,12 @@ quant_call("0404104000", "DriedOtherWhey_QTY.csv") #Kg
 #Ginseng
 quant_call("1211201020", "CultivatedGinseng_QTY.csv")
 quant_call("1211201090", "WildGinseng_QTY.csv")
-#Missing call?
 
+#Corn
 quant_call("1103130020", "CornmealCorn_QTY.csv")
 quant_call("1103130060", "OtherCorn_QTY.csv")
 
+#1% Milk
 quant_call("0401100000", "QTY_Milk.csv")
 
 

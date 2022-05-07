@@ -5,6 +5,7 @@ Created on Thu Apr 21 17:48:06 2022
 
 @author: kayla
 """
+#Import needed modules
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -27,6 +28,7 @@ def clean (df):
     df['MONTH'] = date.dt.month
     df['YEAR'] = date.dt.year
 
+#Run clean function
 clean(master_soybeanFM)
 clean(master_soybean)
 clean(master_whey)
@@ -34,7 +36,7 @@ clean(master_gin)
 clean(master_corn)
 clean(master_milk)
 #%%
-#Compute annual average
+#Compute annual averages
 #Compute soybeanFM annual averages
 mean_W = master_soybeanFM.groupby("YEAR")["WI_QTY"].mean()
 mean_W = mean_W.rename("WI_Mean")
@@ -96,6 +98,8 @@ master_milk = master_milk.merge(mean_W, left_on='YEAR', right_index=True)
 master_milk = master_milk.merge(mean_N, left_on='YEAR', right_index=True)
 
 #%%
+#Create a function to plot monthly exports and annual export averages at both
+#for both the nation and Wisconsin
 def plot(df,time, quantity, title,figure):
     fig, (ax1, ax2) = plt.subplots(2)
     ax1.plot(df["date"], df["QTY_1_MO"])
@@ -114,6 +118,7 @@ def plot(df,time, quantity, title,figure):
     fig.tight_layout()
     fig.savefig(figure)
 
+#Run plot function
 plot(master_soybeanFM,"2018-01-01", "Quantity (Kg)","Soybean Flour Exports", 'SoybeanFM.png')
 plot(master_soybean,"2018-01-01","Quantity (Kg)","Soybean Exports", 'Soybean.png')
 plot(master_whey,"2018-01-01","Quantity (Kg)","Whey Exports", "Whey.png")

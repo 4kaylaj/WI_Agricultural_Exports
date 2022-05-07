@@ -5,7 +5,6 @@ Created on Wed Apr 20 15:28:35 2022
 
 @author: kayla
 """
-#NEED TO MAKE ALL MASTER LOOK THE SAME
 #Import modules
 import pandas as pd  
 
@@ -40,7 +39,7 @@ VSoybeanFM = VSoybeanFM.drop(columns=drop_list)
 drop_list = ["QTY_1_MO", "UNIT_QY1","E_COMMODITY.1"]
 WISoybeanFM = WISoybeanFM.drop(columns=drop_list)
 
-#Rename Columns for calarity
+#Rename columns for calarity
 VSoybeanFM = VSoybeanFM.rename(columns={'ALL_VAL_MO':'National_Value'})
 WISoybeanFM = WISoybeanFM.rename(columns={'ALL_VAL_MO':'WI_Value'})
 #%%
@@ -141,8 +140,8 @@ Master_Soybean = Master_Soybean.drop(columns= ["_merge",'STATE_x',"STATE_y",
 Master_Soybean.to_csv("Master_Soybean.csv", index=False)
 #%%
 #Whey
-#Pull out grouped pieces of CSV fvariable into dataframes for
-#quantity, nation value, and WI value
+#Pull out grouped pieces of CSV variables into dataframes for
+#quantity, national value, and WI value
 QWhey = whey_df.loc[whey_df["QTY_1_MO"] >= 0]
 VWhey = whey_df.query("STATE=='-'")
 WIWhey = whey_df.query("STATE=='WI'")
@@ -186,41 +185,45 @@ QFluidOtherWhey = QFluidOtherWhey.rename(columns= {'QTY_1_MO':'FluidOtherWhey_QT
 QDriedOtherWhey = QDriedOtherWhey.rename(columns= {'QTY_1_MO':'DriedOtherWhey_QTY',
                                                    "UNIT_QY1":"DriedOther_Unit"})
 #%%
-#Merge the individual whey dataframes into a master dataframe
+#Merge QModyWhey and QModOtherWhey 
 Master_Whey = QModWhey.merge(QModOtherWhey,
                                     on=['YEAR', 'MONTH'],
                                     how='outer',
                                     validate="m:m",
                                     indicator=True)
-
+#Check Merge
 print("Check Merge:")
 print(Master_Whey['_merge'].value_counts())
 
+#Clean dataframe
 drop_list = ["_merge","E_COMMODITY_LDESC_x","E_COMMODITY_x",
              "E_COMMODITY_LDESC_y","E_COMMODITY_y"]
 Master_Whey = Master_Whey.drop(columns=drop_list)
 
+#Merge QFluidOtherWhey onto master dataframe
 Master_Whey = Master_Whey.merge(QFluidOtherWhey,
                                     on=['YEAR', 'MONTH'],
                                     how='outer',
                                     validate="m:m",
                                     indicator=True)
-
+#Check merge
 print("Check Merge:")
 print(Master_Whey['_merge'].value_counts())
 
+#Clean dataframe
 Master_Whey = Master_Whey.drop(columns= ["_merge","E_COMMODITY",
                                          "E_COMMODITY_LDESC"])
-
+#Merge QDriedOtherWhey
 Master_Whey = Master_Whey.merge(QDriedOtherWhey,
                                     on=['YEAR', 'MONTH'],
                                     how='outer',
                                     validate="m:m",
                                     indicator=True)
-
+#Check Merge
 print("Check Merge:")
 print(Master_Whey['_merge'].value_counts())
 
+#Clean dataframe
 Master_Whey = Master_Whey.drop(columns= ["_merge", "E_COMMODITY",
                                          "E_COMMODITY_LDESC"])
 
@@ -235,7 +238,6 @@ Master_Whey["FluidOtherWhey_Kg"] = Master_Whey["FluidOtherWhey_QTY"]*1.04
 sum_list = ["ModWhey_QTY","ModOtherWhey_QTY","FluidOtherWhey_Kg",
             "DriedOtherWhey_QTY"]
 Master_Whey['QTY_1_MO'] = Master_Whey[sum_list].sum(axis=1)
-#https://moonbooks.org/Articles/How-to-sum-multiple-columns-together-of-a-dataframe-with-pandas-in-python-/
 #%%
 #Merge whey value dataframe onto master_whey dataframe
 Master_Whey = Master_Whey.merge(VWhey,
@@ -258,13 +260,15 @@ Master_Whey = Master_Whey.merge(WIWhey,
                                           how='outer',
                                           validate='m:m',
                                           indicator=True)
-
+#Check Merge
 print("Check Merge:")
 print(Master_Whey['_merge'].value_counts())
 
+#Clean datagrame
 Master_Whey = Master_Whey.drop(columns= ["_merge","E_COMMODITY",
                                          "E_COMMODITY_LDESC", "STATE"])
 
+#Write out whey master dataframe to a CSV file
 Master_Whey.to_csv("Master_Whey.csv", index=False)
 
 #%%
@@ -310,16 +314,17 @@ QCultGin = QCultGin.rename(columns= {"QTY_1_MO":'CultGin_QTY',
 QWildGin = QWildGin.rename(columns= {'QTY_1_MO':'WildGin_QTY',
                                      "UNIT_QY1":"WildGin_Unit"})
 #%%
-#Merge the individual ginseng dataframes into a master dataframe
+#Merge QCultGin and QWildGIn
 Master_Gin = QCultGin.merge(QWildGin,
                                     on=['YEAR', 'MONTH'],
                                     how='outer',
                                     validate="m:m",
                                     indicator=True)
-
+#Check Merge
 print("Check Merge:")
 print(Master_Gin['_merge'].value_counts())
 
+#Clean dataframe
 drop_list=["_merge","E_COMMODITY_LDESC_x","E_COMMODITY_x",
            "E_COMMODITY_LDESC_y","E_COMMODITY_y"]
 Master_Gin = Master_Gin.drop(columns=drop_list)
@@ -348,18 +353,20 @@ Master_Gin = Master_Gin.merge(WIGin,
                                           how='outer',
                                           validate='m:m',
                                           indicator=True)
-
+#Check Merge
 print("Check Merge:")
 print(Master_Gin['_merge'].value_counts())
 
+#Clean dataframe
 Master_Gin = Master_Gin.drop(columns= ["_merge","E_COMMODITY",
                                          "E_COMMODITY_LDESC", "STATE"])
 
+#Write out gin master dataframe to a CSV file
 Master_Gin.to_csv("Master_Gin.csv", index=False)
 
 #%%
 #Corn
-#Pull out grouped pieces of CSV fvariable into dataframes for
+#Pull out grouped pieces of CSV variable into dataframes for
 #quantity, nation value, and WI value
 QCorn = corn_df.loc[corn_df["QTY_1_MO"] >= 0]
 VCorn = corn_df.query("STATE=='-'")
@@ -406,16 +413,18 @@ QCornmealCorn = QCornmealCorn.drop(columns=drop_list)
 drop_list = ["E_COMMODITY","E_COMMODITY_LDESC"]
 QOtherCorn = QOtherCorn.drop(columns=drop_list)
 #%%
-#Start merging differnt kinds of corn together
+#Merge QCornmealCorn and QOtherCorn
 Master_Corn = QCornmealCorn.merge(QOtherCorn,
                                     on=['YEAR', 'MONTH'],
                                     how='outer',
                                     validate="m:m",
                                     indicator=True)
 
+#Check Merge
 print("Check Merge:")
 print(Master_Corn['_merge'].value_counts())
 
+#Clean dataframe
 drop_list=["_merge"]
 Master_Corn = Master_Corn.drop(columns=drop_list)
 #%%                          
@@ -433,6 +442,7 @@ Master_Corn = Master_Corn.merge(VCorn,
 print("Check Merge:")
 print(Master_Corn['_merge'].value_counts())
 
+#Clean dataframe
 drop_list = ['_merge','E_COMMODITY_LDESC','E_COMMODITY',
              "E_COMMODITY.1",]
 Master_Corn = Master_Corn.drop(columns=drop_list)
@@ -445,12 +455,14 @@ Master_Corn = Master_Corn.merge(WICorn,
                                           validate='m:m',
                                           indicator=True)
 
+#Check merge
 print("Check Merge:")
 print(Master_Corn['_merge'].value_counts())
 
+#Clean dataframe
 Master_Corn = Master_Corn.drop(columns= ["_merge","E_COMMODITY",
                                          "E_COMMODITY_LDESC", "E_COMMODITY.1"])
-
+#Write out corn master dataframe to a CSV file
 Master_Corn.to_csv("Master_Corn.csv", index=False)
 #%%
 #Milk
@@ -515,7 +527,8 @@ Master_Milk.to_csv("Master_Milk.csv", index=False)
 #%%
 #Got help from
 #https://www.stackvidhya.com/select-rows-from-dataframe/
-#%%
+#https://moonbooks.org/Articles/How-to-sum-multiple-columns-together-of-a-dataframe-with-pandas-in-python-/
+
 
 
 

@@ -5,14 +5,14 @@ Created on Wed Apr 20 19:46:33 2022
 
 @author: kayla
 """
-    
+#Import needed modules 
 import os
 import pandas as pd
 #%%
+#Define a function to join CSV files by commodity 
 def join_files(ending, filename):
     #Create empty dataframe
     master_df = pd.DataFrame()
-
     #Create loop to loop through files using os to create path
     for file in os.listdir(os.getcwd()):
         #Create if/then statement to pick out files
@@ -26,6 +26,9 @@ def join_files(ending, filename):
     master_df.to_csv(filename, index=False)
 
 #%%
+#Run join_files function to put all data needed for one commodity
+#into one CSV file
+
 join_files("Whey_QTY.csv", "JoinedWhey.csv")
 join_files("Ginseng_QTY.csv", "JoinedGinseng.csv")
 join_files("Corn_QTY.csv", "JoinedCorn.csv")
