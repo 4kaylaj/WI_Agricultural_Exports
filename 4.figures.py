@@ -119,12 +119,12 @@ def plot(df,time, quantity, title,figure):
     fig.savefig(figure)
 
 #Run plot function
-plot(master_soybeanFM,"2018-06-01", "Quantity (Kg)","Soybean Flour Exports", 'SoybeanFM.png')
-plot(master_soybean,"2018-06-01","Quantity (Kg)","Soybean Exports", 'Soybean.png')
-plot(master_whey,"2018-06-01","Quantity (Kg)","Whey Exports", "Whey.png")
-plot(master_gin,"2018-06-01","Quantity (Kg)","Ginseng Exports","Ginseng.png")
-plot(master_corn,"2018-06-01","Quantity (Kg)","Corn Exports","Corn.png")
-plot(master_milk,"2018-06-01","Quantity (L)","Milk Exports","Milk.png")
+plot(master_soybeanFM,"2018-07-01", "Quantity (Kg)","Soybean Flour Exports", 'SoybeanFM.png')
+plot(master_soybean,"2018-07-01","Quantity (Kg)","Soybean Exports", 'Soybean.png')
+plot(master_whey,"2018-07-01","Quantity (Kg)","Whey Exports", "Whey.png")
+plot(master_gin,"2018-07-01","Quantity (Kg)","Ginseng Exports","Ginseng.png")
+plot(master_corn,"2018-07-01","Quantity (Kg)","Corn Exports","Corn.png")
+plot(master_milk,"2018-07-01","Quantity (L)","Milk Exports","Milk.png")
 #%%
 #Update CSV files
 master_soybeanFM.to_csv("Master_SoybeanFM.csv", index=False)
