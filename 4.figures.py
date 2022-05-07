@@ -94,7 +94,7 @@ mean_N = mean_N.rename('NAT_Mean')
 
 master_milk = master_milk.merge(mean_W, left_on='YEAR', right_index=True)
 master_milk = master_milk.merge(mean_N, left_on='YEAR', right_index=True)
-#%%
+
 #%%
 def plot(df,time, quantity, title,figure):
     fig, (ax1, ax2) = plt.subplots(2)
@@ -113,8 +113,7 @@ def plot(df,time, quantity, title,figure):
     fig.suptitle(title)
     fig.tight_layout()
     fig.savefig(figure)
-#%%
-    
+
 plot(master_soybeanFM,"2018-01-01", "Quantity (Kg)","Soybean Flour Exports", 'SoybeanFM.png')
 plot(master_soybean,"2018-01-01","Quantity (Kg)","Soybean Exports", 'Soybean.png')
 plot(master_whey,"2018-01-01","Quantity (Kg)","Whey Exports", "Whey.png")
@@ -122,5 +121,11 @@ plot(master_gin,"2018-01-01","Quantity (Kg)","Ginseng Exports","Ginseng.png")
 plot(master_corn,"2018-01-01","Quantity (Kg)","Corn Exports","Corn.png")
 plot(master_milk,"2018-01-01","Quantity (L)","Milk Exports","Milk.png")
 #%%
-
+#Update CSV files
+master_soybeanFM.to_csv("Master_SoybeanFM.csv", index=False)
+master_soybean.to_csv("Master_Soybean.csv", index=False)
+master_whey.to_csv("Master_Whey.csv", index=False)
+master_gin.to_csv("Master_Gin.csv", index=False)
+master_corn.to_csv("Master_Corn.csv", index=False)
+master_milk.to_csv("Master_Milk.csv", index=False)
 
