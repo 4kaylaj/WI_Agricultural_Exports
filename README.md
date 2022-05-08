@@ -17,7 +17,7 @@ All data came from the U.S. Census Bureau’s USA Trade® Online. Specifics abou
 ## __Output Files__
 This project produces two types of deliverables: CSV files and figures. 
 
-_CSV Files:_ Outline key variables needed to assess the impact of the trade wars for a given commodity. Varialbes include: National Quantity, Quantity Unit of Measurement, National Value, Wisconsin Quantity, Wisconsin Value, National Annual Quantity Average,Wisconsin Annual Quantity Average. 
+_CSV Files:_ Outline key variables needed to assess the impact of the trade wars for a given commodity. Variables include: National Quantity, Quantity Unit of Measurement, National Value, Wisconsin Quantity, Wisconsin Value, National Annual Quantity Average, Wisconsin Annual Quantity Average. 
 1. Master_SoybeanFM.csv
 2. Master_Soybean.csv
 3. Master_Whey.csv
@@ -33,7 +33,7 @@ _Figures:_ visualize key statistics captured in the CSV files.
 5. Corn.png
 6. Milk.png
 
-## __Data Handeling and Processing__
+## __Data Handling and Processing__
 This project used Python 3.9 for data handling and visualization. It uses 4 main scripts:
 
 1. _collect.py:_ This script is used to pull export data from the U.S. Census Bureau’s USA Trade® Online. It uses the Census API to retrieve export commodities by Harmonized System (HS) code and then stores the commodity data in CSV files. Although this project examines several commodities, exporting data into a CSV file allows the functions defined in this script to be useful for anyone seeking to retrieve general export data from USA Trade® Online. It is important to note that when doing API calls to USA Trade® Online, there are different endpoints for different variables. This project used two different endpoints to get export commodities’ values and quantities by HS code. The International Trade Data API User Guide can be found [here](https://www.census.gov/foreign-trade/reference/guides/Guide%20to%20International%20Trade%20Datasets.pdf) for more details about their API system.
@@ -48,12 +48,12 @@ This project used Python 3.9 for data handling and visualization. It uses 4 main
 Overall, the results do not clearly demonstrate an association between the U.S.-China trade war and a decline in Wisconsin agricultural exports. However, certain commodities do see a decrease in exports at the time of the trade wars, which would seem indicative of the negative impact. Further analysis, such as analyzing China-bound export trends and/or evaluating the effect on commodity valuation, is needed to better understand the impact of the trade wars of Wisconsin agricultural commodities. 
 
 ### __1% Milk__: 
-This figure plots monthly 1% milk exports (in blue) and annual export averages (in orange). Although the Wisconsin annual average does not change at the start of the trade war, there is a visable drop in 2019. This decrease could be attributed to the escalation of the trade wars in 2019. The 2019 drop is also visable at the national level, which could demonstrate that the decrease in annual average exports at the state level is part of a larger trend. However, variation does seem to be normal for this commodity so further analysis is needed to assess the impact of the trade wars on 1% milk.
+This figure plots monthly 1% milk exports (in blue) and annual export averages (in orange). Although the Wisconsin annual average does not change at the start of the trade war, there is a visible drop in 2019. This decrease could be attributed to the escalation of the trade wars in 2019. The 2019 drop is also visible at the national level, which could demonstrate that the decrease in annual average exports at the state level is part of a larger trend. However, variation does seem to be normal for this commodity so further analysis is needed to assess the impact of the trade wars on 1% milk.
 
 ![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/Milk.png?raw=true "Milk Exports")
 
 ### __Whey__
-This figure plots monthly whey exports (in blue) and annual export averages (in orange). At the start of the trade wars, there is a clear decrease in exports. This decline continues through the peak of the trade wars in 2019. Thus, whey seems to be one of the Wisconsin agiricultural commodities negatively impacted by the U.S.-China trade wars.
+This figure plots monthly whey exports (in blue) and annual export averages (in orange). At the start of the trade wars, there is a clear decrease in exports. This decline continues through the peak of the trade wars in 2019. Thus, whey seems to be one of the Wisconsin agricultural commodities negatively impacted by the U.S.-China trade wars.
 
 ![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/Whey.png?raw=true "Whey Exports")
 
@@ -63,12 +63,12 @@ This figure plots monthly ginseng exports (in blue) and annual export averages (
 ![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/Ginseng.png?raw=true "Ginseng Exports")
 
 ### __Corn__
-This figure plots monthly corn exports (in blue) and annual export averages (in orange). Missing data is problematic when it comes to assessing the impact of the trade wars on Wisconsin corn exports. Although there was a decrease in national corn exports from 2018-2019, this decrease does not seem differnt from yearly variation. Thus,further analysis and data is needed to fully understand the impact of the trade wars on corn exports. 
+This figure plots monthly corn exports (in blue) and annual export averages (in orange). Missing data is problematic when it comes to assessing the impact of the trade wars on Wisconsin corn exports. Although there was a decrease in national corn exports from 2018-2019, this decrease does not seem different from yearly variation. Thus, further analysis and data is needed to fully understand the impact of the trade wars on corn exports. 
 
 ![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/Corn.png?raw=true "Corn Exports")
 
 ### __Soybeans__ 
-This figure plots monthly soybean exports (in blue) and annual export averages (in orgnage). Again missing, data is problamatic for assessing the impact of the trade wars at the state level. However at the start of the trade wars there does seem to be an increase in soybean exports at the national level. Nonetheless, at the height of the trade wars in 2019, there is an annaula average decrease in soybean exports. This decrease could be attributed to an increase in retalitory actions taken by China. Further analysis and data is needed to fully understand the impact of the trade wars on soybean exports.  
+This figure plots monthly soybean exports (in blue) and annual export averages (in orange). Again missing, data is problematic for assessing the impact of the trade wars at the state level. However at the start of the trade wars there does seem to be an increase in soybean exports at the national level. Nonetheless, at the height of the trade wars in 2019, there is an annual average decrease in soybean exports. This decrease could be attributed to an increase in retaliatory actions taken by China. Further analysis and data is needed to fully understand the impact of the trade wars on soybean exports.  
 
 ![alt text](https://github.com/4kaylaj/WI_Agricultural_Exports/blob/main/Soybean.png?raw=true=true "Soybean Exports")
 
